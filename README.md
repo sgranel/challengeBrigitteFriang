@@ -6,12 +6,12 @@ Après le challenge Richelieu, la DGSE a mis en ligne un nouveau challenge qui a
 On y accédait depuis le site https://challengecybersec.fr/
 
 ## Entrée dans le challenge.
-En tapant l'url, nous arrivons sur la page suivante : ![Accueil](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture1.PNG?token=AG2F56EOUMQRDTGERQDUPFK7TAQI2)
+En tapant l'url, nous arrivons sur la page suivante : ![Accueil](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture1.PNG)
 
-Nous affichons le code source de la page afin de trouver des indices: ![CodeSource](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture2.PNG?token=AG2F56FJXFUL7KDV7M65WB27TAQ4G) 
+Nous affichons le code source de la page afin de trouver des indices: ![CodeSource](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture2.PNG) 
 Là, on voit une ligne commentée `/static/message-secret.html`
 
-En tapant cette url dans le navigateur, nous arrivons sur la page suivante : ![Cesar](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture3.PNG?token=AG2F56B4EGG6U3PQY6754CK7TARDO)
+En tapant cette url dans le navigateur, nous arrivons sur la page suivante : ![Cesar](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture3.PNG)
 Nous remarquons trois choses en arrivant sur la page : tout d'abord, la présence de 4 caractères en gras : `joha`. Nous les notons et les mettons de coté.
 Ensuite, le message en lui-même. En effet, il n'est pas lisible mais n'a pas un chiffrement fort car la structure du texte est conservée, ce qui fait penser au chiffrement de César. Cette hypothèse est confirmée par le troisième point : le titre de la page, qui est Cesar.
 
@@ -25,6 +25,6 @@ Le texte nous raconte la vie de Briggite Friang. On y apprend qu'elle cachait de
 
 Ce qui nous ramène aux 4 caractères trouvés avant. En appliquant le déchiffrement de César, on récupère le mot : chat.
 
-En mettant, ce mot dans l'url, nous accédons au site suivant : ![Chat](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture4.PNG?token=AG2F56AHBHIUNYZQO4HTB2S7TAS2O) 
+En mettant, ce mot dans l'url, nous accédons au site suivant : ![Chat](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture4.PNG) 
 
 ## Le chat
