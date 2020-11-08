@@ -164,3 +164,8 @@ On utilise l'adresse mail de l'agent et son mot de passe, ce qui nous donne un Q
 ![Flag 1](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Screenshot_flag_web.jpg)
 
 Pour nous remercier, il nous donne une capture réseau chiffré en TLS1.0.
+
+### Blaise Pascal
+Blaise Pascal nous donne deux fichiers (`original.txt` et `intercept.txt`) où il nous dit que des caractères ont été ajoutés dans le second et qu'il faut qu'on arrive à les récupérer et à retrouver ce que c'est.
+En commençant à regarder les deux fichiers, il apparait qu'il ne sera pas possible de le faire à la main. On écrit donc un petit script en python qui nous récupère tous ces fameux caractères en plus.
+Ca donne un fichier comportant plus de 5000 caractères (`message_recuperere.txt`).
