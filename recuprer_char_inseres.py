@@ -12,8 +12,12 @@ for i in range(len(chaine_original)):
     # Note : dans votre code vous faisiez 'for i in chaine:'. i est alors de type str et non int donc chaine[i] va générer une erreur.
     # https://docs.python.org/3.4/library/functions.html#func-range
     if(chaine_original[i] != chaine_intercepte[j]):
-        msg.append(chaine_intercepte[j]);
-        j = j+1;
+        decaler = 1
+        while (decaler == 1):
+            msg.append(chaine_intercepte[j]);
+            j = j+1;
+            if(chaine_original[i] == chaine_intercepte[j]):
+                decaler = 0
     j = j +1
     
 print(''.join(msg))
