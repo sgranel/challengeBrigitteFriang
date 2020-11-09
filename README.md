@@ -169,3 +169,11 @@ Pour nous remercier, il nous donne une capture réseau chiffré en TLS1.0.
 Blaise Pascal nous donne deux fichiers (`original.txt` et `intercept.txt`) où il nous dit que des caractères ont été ajoutés dans le second et qu'il faut qu'on arrive à les récupérer et à retrouver ce que c'est.
 En commençant à regarder les deux fichiers, il apparait qu'il ne sera pas possible de le faire à la main. On écrit donc un petit script en python qui nous récupère tous ces fameux caractères en plus.
 Ca donne un fichier comportant plus de 5000 caractères (`message_recuperere.txt`).
+
+En écrivant un petit script python (`decode_base64.py`), on obtient une longue chaine de caractère. En la regardant, on voit au début JFIF. En cherchant sur internet, on voit qu'il s'agit d'un format d'image. On renomme le fichier décodé de .txt à .jfif et une image apparait.
+
+On voit une chaine de caractères. On les prend et on les met dans un navigateur, ce qui nous renvoi une erreur 404. Têtu, je retente mais en mettant les caractères en minuscule cette fois-ci. On arrive sur une page nous proposant de télécharger une archive.
+Il faut qu'on aide le gouvernement Evil à ranger ces stocks dans différents entreprôts sans dépasser la valeur.
+
+Pour ne pas s'embêter, on a encore recours à python et on écrit un petit script `remplissage.py` (peut-être pas le plus optimisé, mais qui fonctionne).
+Ca nous donne une nouvelle url : /9bcb53d26eab7e9e08cc9ffae4396b48
