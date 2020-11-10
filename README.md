@@ -187,4 +187,10 @@ N'ayant pas envie de parcourir tout à la main, on fait un petit bash qui le fer
 do
 curl https://challengecybersec.fr/9bcb53d26eab7e9e08cc9ffae4396b48/blog/post/$i | grep partial-proof > test$i.txt;
 done`
+Comme il reste de la "polution" dans les différents fichiers, on écrit un petit script python qui va récupérer que les parties qui nous intéressent et nous renvoie le md5 du tout : `digest.py`.
 
+On obtient alors une nouvelle url nous permettant d'arriver sur la page de connection du site Evil Gouv Archives.
+![Url des archives d'Evil Gouv](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture15.jpg)
+
+![Page de login des archives d'Evil Gouv](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture16.jpg)
+On arrive sur le site qui nous demande de nous connecter. On regarde le code source de la page et on voit que lorsqu'on clique sur le bouton `Se conncter`, du javascript est appelé. S'il renvoie 0, on a un message d'erreur. S'il renvoie 1, on est connecté et redirigé vers la page qui correspond à notre login. Pas de chance, on ne pourra pas simplement forcer la valeur 1. On regarde alors le fichier `login.js`, qui est écrit en hexadécimal.
