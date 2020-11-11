@@ -14,6 +14,8 @@ Après le challenge Richelieu, la DGSE a mis en ligne un nouveau challenge qui a
 
 On y accédait depuis le site https://challengecybersec.fr/
 
+J'ai essayé de mettre en pièce jointe le maximum d'éléments pour ceux qui aimeraient tenter chez eux la partie hors ligne, même si le challenge est fini.
+
 ## Entrée dans le challenge<a id="entree"></a>.
 En tapant l'url, nous arrivons sur la page suivante : ![Accueil](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture1.PNG)
 
