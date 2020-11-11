@@ -169,9 +169,7 @@ Lorsqu'on rentre l'url, nous arrivons sur la page
 ![Air Evil: reset du compte de l'agent](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture10.PNG)
 
 Au vu du mot de passe, on voit que l'attaque par force brute n'était pas une bonne solution.
-On utilise l'adresse mail de l'agent et son mot de passe, ce qui nous donne un QRCode. En le scannant avec notre smartphone, on obtient un flag que nous donnons à Jéméry Nitel :
-![Flag 1](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Screenshot_flag_web.jpg)
-
+On utilise l'adresse mail de l'agent et son mot de passe, ce qui nous donne un QRCode. En le scannant avec notre smartphone, on obtient un flag que nous donnons à Jéméry Nitel : DGSESIEE{2cd992f9b2319860ce3a35db6673a9b8}
 Pour nous remercier, il nous donne une capture réseau chiffré en TLS1.0.
 
 #### La capture TLS1.0
