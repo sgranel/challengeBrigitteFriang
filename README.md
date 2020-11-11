@@ -209,16 +209,24 @@ On obtient alors une nouvelle url nous permettant d'arriver sur la page de conne
 On arrive sur le site qui nous demande de nous connecter. On regarde le code source de la page et on voit que lorsqu'on clique sur le bouton `Se conncter`, du javascript est appelé. S'il renvoie 0, on a un message d'erreur. S'il renvoie 1, on est connecté et redirigé vers la page qui correspond à notre login. Pas de chance, on ne pourra pas simplement forcer la valeur 1. On regarde alors le fichier `login.js`, qui est écrit en hexadécimal.
 
 En regardant la fonction final, on voit qu'il faut que la chaine transformée par 2 fonctions soit égale à `7<0l<ni03<l<l<3>5<b`>dk>j;3n0>>o9n0`nk39`.
+
 En s'intéressant à lda deuxième fonction de transformation, on voit qu'elle prend un caractère, qu'elle le transforme en son équivalent ASCII et qu'elle fait une opération XOR (ou exclusif) avec un élément de la constante afin de ne garder que les éléments différents de leur valeur en 32bits et qu'elle fait un AND (un ET) avec la valeur 32bits du chiffre 15 afin de ne garder que les éléments identiques.
+
 On voit également un test pour vérifier que les codes ASCII soient bien compris entre 33 et 125. On fait donc une fonction avec une boucle commençant à 33 et s'arrêtant à 125, et on transforme la valeur de l'incrément en string. On arrête la boucle dès qu'on trouve le caractère voulu. Soit à la première tour de boucle, on doit trouver en sortie `7`, ce qui nous donne en entrée le caractère `3`. On fait ça pour chaque élément et on trouve qu'en entrée de la deuxième fonction, on doit avoir la chaine `373b3eb199e3b07027eb3fd5a21c272b9d9bdc35`.
 
 ### Alphonse Bertillon<a id="alphonse"></a>
 Alphonse Bertillon nous explique qu'un agent d'Evi Gouv s'est introduit dans les serveurs et il aimerait qu'on retrouve l'ip de l'attaquant. Pour cela, il donne un fichier de log (`access.log`). Pour le retrouver, on tente : 
+
 `$ cat access.log | grep 404`
+
 On ne trouve rien de cette manière là. On change de logique et on tente bêtement de trouver une référence à Evil Gouv.
+
 `$ cat access.log | grep Ev` 
+
 Là, la recherche nous retourne la ligne suivante : `179.97.58.61 - - [Nov 05 2020 16:22:20] "POST /login HTTP/1.1" 200 476 "-" "Evil Browser"`.
+
 On communique l'ip à Alphonse qui nous remercie et nous donne une image `evil_country_landscape.jpg`. Il nous dit qu'elle peut contenir un malware et qu'il ne faut pas l'exécuter directement sur un ordinateur.
+
 L'image fait plus de 300Mo ce qui laisse penser qu'elle cache quelque chose. Après une recherche sur internet, on apprend (merci Olivier) que le format jpg finit par les valeurs hexadecimal FFD9. On ouvre l'image avec une éditeur hexadecimal (HexEdit pour mon cas) et on recherche FFD9 et on retire tout le début jusqu'à ce point. 
 Ca nous donne un répertoire contenant 2 fichiers .img. On les parcourt avec le logiciel binwalk, ce qui nous donne 2 répertoires. On met le contenu de ces répertoires et les fichiers .img dans l'outil de forensic Autopsy. Hélas, il ne trouve rien de très intéressant. Mais il nous met en garde, car il a trouvé des éléments avec une forte entropy. Ca laisse supposer la présence d'un logiciel malveillant, comme prévenu par Alphonse.
 
