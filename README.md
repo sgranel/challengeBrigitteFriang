@@ -1,11 +1,20 @@
 # Challenge Brigitte Friang
 
-## Résumé
+## Sommaire
+ * [Résumé](#resume)
+ * [Entrée dans le challenge](#entree)
+ * [Le chat](#chat)
+   * [Antoine Rossignol](#antoine)
+   * [Jérémy Nitel](#jeremy)
+   * [Blaise Pascal](#blaise)
+   * [Alphonse Bertillon](#alphonse)
+ * [Conclusion](#conclusion)
+## Résumé<a id="resume"></a>
 Après le challenge Richelieu, la DGSE a mis en ligne un nouveau challenge qui a lieu du 24/10/2020 au 11/11/2020.
 
 On y accédait depuis le site https://challengecybersec.fr/
 
-## Entrée dans le challenge.
+## Entrée dans le challenge<a id="entree"></a>.
 En tapant l'url, nous arrivons sur la page suivante : ![Accueil](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture1.PNG)
 
 Nous affichons le code source de la page afin de trouver des indices: ![CodeSource](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture2.PNG) 
@@ -27,7 +36,7 @@ Ce qui nous ramène aux 4 caractères trouvés avant. En appliquant le déchiffr
 
 En mettant, ce mot dans l'url, nous accédons au site suivant : ![Chat](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture4.PNG) 
 
-## Le chat
+## Le chat<a id="chat"></a>
 Il est composé de plusieurs canaux, un pour chaque interlocuteur. Il y a tout d'abord Armand Richelieu, qui est le Directeur et qui nous explique que le service a appris que le gouvernement Evil va mettre en place une répression meurtrière contre sa population. Notre mission est d'arriver à déjouer cela.
 Pour ça, nous devons parler avec les 4 autres membres du chat qui représentent chacun un service. Nous avons :
 * Antoine Rossignol : Service Crypto
@@ -35,7 +44,7 @@ Pour ça, nous devons parler avec les 4 autres membres du chat qui représentent
 * Blaise Pascal : Service Algo
 * Alphonse Bertillon : Service Forensic/
 
-### Antoine Rossignol
+### Antoine Rossignol<a id="antoine"></a>
 Il nous donne un fichier `echange.txt`, un `compte-rendu.pdf`, un `layout.pdf` et `archive_chiffre`.
 Il nous explique qu'ils travaillent avec Eve Descartes qui est une spécialiste des attaques matérielles et qu'elle travaille dans les salles blanches d'ESIEE Paris.
 Elle a analysé un matériel intercepté qui appartient au gouvernement Evil Gouv et qu'elle nous a envoyé ses résultats dans un compte-rendu protégé par un mot de passe.
@@ -45,7 +54,7 @@ On appelle, et on entend une suite de bip courts et longs, ce qui fait penser di
 On y voit 16x16 éléments dont certains sont "cassés". On cherche si ces éléments cassés ont un intérêt ou non.
 Instinctivement, un part sur une clef en hexadecimal afin d'essayer d'ouvrir l'archive, sans succès.
 
-### Jéméremy Nitel
+### Jérémy Nitel<a id="jeremy"></a>
 Il nous explique qu'il a trouvé le site web d'un entrepôt basé à Evil Country qui sert pour l'attaque prévue contre les résistants. Il nous demande de trouver l'adresse mail d'un agent du gouvernement ennemi afin de pouvoir prouver ce qui se prépare. Le site se trouve à l'adresse suivante : https://challengecybersec.fr/4e9033c6eacf38dc2a5df7a14526bec1  
 Ainsi il faudra qu'on trouve un moyen de prender un billet sur le site d'AirEvil, unique compagnie aérienne qui s'y rend, grace aux informations récupérées sur Stockos. Le site se trouve :  https://challengecybersec.fr/35e334a1ef338faf064da9eb5f861d3c. Il faudra réservez le vol ABDJI6 du 26/10/2020 au 28/10/2020 de Bad City à Evil City.
 
@@ -165,7 +174,10 @@ On utilise l'adresse mail de l'agent et son mot de passe, ce qui nous donne un Q
 
 Pour nous remercier, il nous donne une capture réseau chiffré en TLS1.0.
 
-### Blaise Pascal
+#### La capture TLS1.0
+N'ayant jamais cassé de trames réseaux en TLS1.0 et malgré des recherches sur internet sur le sujet, je me suis retrouvé bloqué sur cette partie.
+
+### Blaise Pascal<a id="blaise"></a>
 #### Les différences entre deux fichiers
 Blaise Pascal nous donne deux fichiers (`original.txt` et `intercept.txt`) où il nous dit que des caractères ont été ajoutés dans le second et qu'il faut qu'on arrive à les récupérer et à retrouver ce que c'est.
 En commençant à regarder les deux fichiers, il apparait qu'il ne sera pas possible de le faire à la main. On écrit donc un petit script en python qui nous récupère tous ces fameux caractères en plus.
@@ -195,3 +207,20 @@ On obtient alors une nouvelle url nous permettant d'arriver sur la page de conne
 #### Les archives d'Evil Gouv
 ![Page de login des archives d'Evil Gouv](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture16.jpg)
 On arrive sur le site qui nous demande de nous connecter. On regarde le code source de la page et on voit que lorsqu'on clique sur le bouton `Se conncter`, du javascript est appelé. S'il renvoie 0, on a un message d'erreur. S'il renvoie 1, on est connecté et redirigé vers la page qui correspond à notre login. Pas de chance, on ne pourra pas simplement forcer la valeur 1. On regarde alors le fichier `login.js`, qui est écrit en hexadécimal.
+
+En regardant la fonction final, on voit qu'il faut que la chaine transformée par 2 fonctions soit égale à `7<0l<ni03<l<l<3>5<b`>dk>j;3n0>>o9n0`nk39`.
+En s'intéressant à lda deuxième fonction de transformation, on voit qu'elle prend un caractère, qu'elle le transforme en son équivalent ASCII et qu'elle fait une opération XOR (ou exclusif) avec un élément de la constante afin de ne garder que les éléments différents de leur valeur en 32bits et qu'elle fait un AND (un ET) avec la valeur 32bits du chiffre 15 afin de ne garder que les éléments identiques.
+On voit également un test pour vérifier que les codes ASCII soient bien compris entre 33 et 125. On fait donc une fonction avec une boucle commençant à 33 et s'arrêtant à 125, et on transforme la valeur de l'incrément en string. On arrête la boucle dès qu'on trouve le caractère voulu. Soit à la première tour de boucle, on doit trouver en sortie `7`, ce qui nous donne en entrée le caractère `3`. On fait ça pour chaque élément et on trouve qu'en entrée de la deuxième fonction, on doit avoir la chaine `373b3eb199e3b07027eb3fd5a21c272b9d9bdc35`.
+
+### Alphonse Bertillon<a id="alphonse"></a>
+Alphonse Bertillon nous explique qu'un agent d'Evi Gouv s'est introduit dans les serveurs et il aimerait qu'on retrouve l'ip de l'attaquant. Pour cela, il donne un fichier de log (`access.log`). Pour le retrouver, on tente : 
+`$ cat access.log | grep 404`
+On ne trouve rien de cette manière là. On change de logique et on tente bêtement de trouver une référence à Evil Gouv.
+`$ cat access.log | grep Ev` 
+Là, la recherche nous retourne la ligne suivante : `179.97.58.61 - - [Nov 05 2020 16:22:20] "POST /login HTTP/1.1" 200 476 "-" "Evil Browser"`.
+On communique l'ip à Alphonse qui nous remercie et nous donne une image `evil_country_landscape.jpg`. Il nous dit qu'elle peut contenir un malware et qu'il ne faut pas l'exécuter directement sur un ordinateur.
+L'image fait plus de 300Mo ce qui laisse penser qu'elle cache quelque chose. Après une recherche sur internet, on apprend (merci Olivier) que le format jpg finit par les valeurs hexadecimal FFD9. On ouvre l'image avec une éditeur hexadecimal (HexEdit pour mon cas) et on recherche FFD9 et on retire tout le début jusqu'à ce point. 
+Ca nous donne un répertoire contenant 2 fichiers .img. On les parcourt avec le logiciel binwalk, ce qui nous donne 2 répertoires. On met le contenu de ces répertoires et les fichiers .img dans l'outil de forensic Autopsy. Hélas, il ne trouve rien de très intéressant. Mais il nous met en garde, car il a trouvé des éléments avec une forte entropy. Ca laisse supposer la présence d'un logiciel malveillant, comme prévenu par Alphonse.
+
+## Conclusion<a id="conclusion"></a>
+Je n'ai pas pu finir ce challenge, par manque de temps mais aussi des lacunes techniques, en forensic par exemple. Cependant, je l'ai trouvé très intéressant aussi bien techniquement que l'histoire dans lequel il se déroule. Merci à la DGSE pour ce super travail et vivement le prochain.
