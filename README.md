@@ -214,6 +214,16 @@ En s'intéressant à lda deuxième fonction de transformation, on voit qu'elle p
 
 On voit également un test pour vérifier que les codes ASCII soient bien compris entre 33 et 125. On fait donc une fonction avec une boucle commençant à 33 et s'arrêtant à 125, et on transforme la valeur de l'incrément en string. On arrête la boucle dès qu'on trouve le caractère voulu. Soit à la première tour de boucle, on doit trouver en sortie `7`, ce qui nous donne en entrée le caractère `3`. On fait ça pour chaque élément et on trouve qu'en entrée de la deuxième fonction, on doit avoir la chaine `373b3eb199e3b07027eb3fd5a21c272b9d9bdc35`.
 
+En entrant `00000000000000000000000000000000000000001` dans la première fonction de chiffrement, on recupère la position du 1 dans la sortie. On essaie ainsi chaque position et on arrive à une url `3f3939527e73ad93b73b070bb12cde1292bbcde5`. On essaie et ça fonctionne, mais on est redirigé vers une 404. Et oui, le premier caractère et le 5° sont écrasés par la fonction.
+
+Pour trouver la bonne url, on fait un petit script en python qui remplace le 1° et le 5° caractères et test si on a une 404 ou non. On trouve ainsi l'url : https://challengecybersec.fr/1410e53b7550c466c76fc7268a8160ae/5f3949527e73ad93b73b070bb12cde1292bbcde5
+
+![Page des archives d'Evil Gouv](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture17.PNG)
+
+#### Page des CTF
+On clique sur les 3 liens et on trouve un site sur lequel on s'enregistre et on peut faire des CTF pour gagner des points : 
+![CTF](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture18.PNG)
+
 ### Alphonse Bertillon<a id="alphonse"></a>
 Alphonse Bertillon nous explique qu'un agent d'Evi Gouv s'est introduit dans les serveurs et il aimerait qu'on retrouve l'ip de l'attaquant. Pour cela, il donne un fichier de log (`access.log`). Pour le retrouver, on tente : 
 
