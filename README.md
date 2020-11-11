@@ -15,12 +15,12 @@ Après le challenge Richelieu, la DGSE a mis en ligne un nouveau challenge qui a
 On y accédait depuis le site https://challengecybersec.fr/
 
 ## Entrée dans le challenge<a id="entree"></a>.
-En tapant l'url, nous arrivons sur la page suivante : ![Accueil](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture1.PNG)
+En tapant l'url, nous arrivons sur la page suivante : ![Accueil](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture1.PNG)
 
-Nous affichons le code source de la page afin de trouver des indices: ![CodeSource](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture2.PNG) 
+Nous affichons le code source de la page afin de trouver des indices: ![CodeSource](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture2.PNG) 
 Là, on voit une ligne commentée `/static/message-secret.html`
 
-En tapant cette url dans le navigateur, nous arrivons sur la page suivante : ![Cesar](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture3.PNG)
+En tapant cette url dans le navigateur, nous arrivons sur la page suivante : ![Cesar](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture3.PNG)
 Nous remarquons trois choses en arrivant sur la page : tout d'abord, la présence de 4 caractères en gras : `joha`. Nous les notons et les mettons de coté.
 Ensuite, le message en lui-même. En effet, il n'est pas lisible mais n'a pas un chiffrement fort car la structure du texte est conservée, ce qui fait penser au chiffrement de César. Cette hypothèse est confirmée par le troisième point : le titre de la page, qui est Cesar.
 
@@ -34,7 +34,7 @@ Le texte nous raconte la vie de Briggite Friang. On y apprend qu'elle cachait de
 
 Ce qui nous ramène aux 4 caractères trouvés avant. En appliquant le déchiffrement de César, on récupère le mot : chat.
 
-En mettant, ce mot dans l'url, nous accédons au site suivant : ![Chat](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture4.PNG) 
+En mettant, ce mot dans l'url, nous accédons au site suivant : ![Chat](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture4.PNG) 
 
 ## Le chat<a id="chat"></a>
 Il est composé de plusieurs canaux, un pour chaque interlocuteur. Il y a tout d'abord Armand Richelieu, qui est le Directeur et qui nous explique que le service a appris que le gouvernement Evil va mettre en place une répression meurtrière contre sa population. Notre mission est d'arriver à déjouer cela.
@@ -49,7 +49,7 @@ Il nous donne un fichier `echange.txt`, un `compte-rendu.pdf`, un `layout.pdf` e
 Il nous explique qu'ils travaillent avec Eve Descartes qui est une spécialiste des attaques matérielles et qu'elle travaille dans les salles blanches d'ESIEE Paris.
 Elle a analysé un matériel intercepté qui appartient au gouvernement Evil Gouv et qu'elle nous a envoyé ses résultats dans un compte-rendu protégé par un mot de passe.
 On affiche le pdf `compte rendu`, où y voit une adresse mail et un numéro de téléphone. Une recherche google ne nous apprend rien sur ces deux éléments. Après avoir cherché des info dans le document, on ne trouve rien. Aussi, on envoie un email à Eve car Antoine nous conseille de prendre contact avec elle. Elle nous répond qu'elle est en vacances, mais que son numéro est joignable. 
-![Eve Descartes](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture12.PNG)
+![Eve Descartes](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture12.PNG)
 On appelle, et on entend une suite de bip courts et longs, ce qui fait penser directement penser à du morse. On installe une application d'enregistrement d'appel (CallBox par exemple) et on rappelle. Ainsi, nous avons un fichier mp3 du message qu'on peut re-écouter tranquillement. A force d'écouter le message, on trouve le mot "resistance" qui nous permet d'ouvrir le pdf layout.
 On y voit 16x16 éléments dont certains sont "cassés". On cherche si ces éléments cassés ont un intérêt ou non.
 Instinctivement, un part sur une clef en hexadecimal afin d'essayer d'ouvrir l'archive, sans succès.
@@ -60,12 +60,12 @@ Ainsi il faudra qu'on trouve un moyen de prender un billet sur le site d'AirEvil
 
 #### Stockos
 On se connecte sur le site de Stockos: 
-![Stockos](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture5.PNG) 
+![Stockos](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture5.PNG) 
 Pour se connecter, on essaie tout bêtement `admin/admin` car Jéméry Nitel nous a dit que les mots de passes qui avaient fuités de cette plateforme n'étaient pas très original.
 
 Une fois dans le site, on se balade et on ne trouve aucune information facilement (et oui, ça n'aurait pas été marrant :) ). Par contre, on tombe sur un champ texte permettant de faire des recherches dans la page de gestion des stocks.
 Ca sent la faille sql. Aussi pour s'en assurer, on tape `'` et on lance la recherche. Le site nous remonte une erreur SQL :
-![Stockos SQLI](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture6.PNG)
+![Stockos SQLI](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture6.PNG)
 Pour ne pas s'embêter à chercher à la main quelles sont les tables présentes, on va profiter de cette faille pour récupérer les noms des tables. Pour cela, on met le code suivant dans le champ texte : `' UNION ALL SELECT 1, 2, 3, 4, table_name FROM information_schema.tables #`
 Gentiment, le site nous renvoie les noms des tables suivantes : 
 * customer
@@ -89,7 +89,7 @@ Ce qui nous donne une liste où on repère les deux adresses suivantes qui sont 
 *	11 	Evil Corp 	1056 5th Avenue, New York City, New York, USA 	2015-10-21 00:00:00 	orders@ecorp.zz
 *	12 	Evil Gouv 	2056 Evil Road, Evil City, Death State, Evil Country 	2015-10-21 00:00:00 	agent.malice@secret.evil.gov.ev
 
-![Stockos mail](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture7.PNG) 
+![Stockos mail](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture7.PNG) 
 	
 Ensuite, nous récupérons le noms des colonnes de la tables orders:
 `	' UNION ALL SELECT 1, 2, 3, 4, column_name FROM information_schema.columns WHERE table_name='orders' #`
@@ -139,7 +139,7 @@ Au final, Stockos nous a appris l'adresse mail de l'agent qui a passé un comman
 
 #### Air Evil
 Nous allons maintenant nous intéresser au site des billets d'avion afin d'essayer de prendre notre billet.
-![Air Evil](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture13.PNG)
+![Air Evil](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture13.PNG)
 
 On tente de se connecter sur Evil Air avec l'adresse mail `agent.malice@secret.evil.gov.ev` et `test` en mot de passe. Nous obtenons la réponse suivante : mot passe incorrect
 Nous faisons la même manipulation avec une adresse mail inventée `fsdfsd1239ssfsf@fsfds.fr` et `test` en mot de passe. Le site nous répond que l'adresse mail n'existe pas. 
@@ -151,7 +151,7 @@ La deuxième consiste à utiliser un dictionnaire et de tenter tous les mots de 
 Personnellement, la première option m'intéresse plus. Donc va pour la réflexion.
 
 Après avoir fouillé le site, on va sur la page d'inscription, où on voit le message suivant :
-![Air Evil: Inscription](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture14.PNG)
+![Air Evil: Inscription](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture14.PNG)
 Ce qui nous montre qu'on est sur la bonne voie.
 
 On crée un compte avec une adresse mail jetable (yopmail). On reçoit un mail de validation où on voit que l'url comporte une base64 à la fin.
@@ -159,18 +159,18 @@ On décode cette base64 et on voit qu'il s'agit de notre adresse mail.
 On n'oublie pas de valider notre adresse mail. :)
 
 Ensuite, on utilise l'action de changement de mot de passe et on reçoit le mail suivant :
-![Air Evil: reset](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture8.PNG)
+![Air Evil: reset](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture8.PNG)
 On trouve la même base64 dans l'url de réinitialisation du mot de passe. On clique dessus pour voir ce qu'on obtient :
-![Air Evil: reset mon compte](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture9.PNG)
+![Air Evil: reset mon compte](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture9.PNG)
 On prend l'adresse mail de l'agent malice et on l'encode en base64, ce qui nous donne l'url suivante : http://challengecybersec.fr/35e334a1ef338faf064da9eb5f861d3c/reset/YWdlbnQubWFsaWNlQHNlY3JldC5ldmlsLmdvdi5ldg==
 
 Pour encoder/décoder du base64, les outils ne manquent pas sur le net, mais aussi en python ou même par burp.
 Lorsqu'on rentre l'url, nous arrivons sur la page 
-![Air Evil: reset du compte de l'agent](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture10.PNG)
+![Air Evil: reset du compte de l'agent](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture10.PNG)
 
 Au vu du mot de passe, on voit que l'attaque par force brute n'était pas une bonne solution.
 On utilise l'adresse mail de l'agent et son mot de passe, ce qui nous donne un QRCode. En le scannant avec notre smartphone, on obtient un flag que nous donnons à Jéméry Nitel :
-![Flag 1](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Screenshot_flag_web.jpg)
+![Flag 1](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Screenshot_flag_web.jpg)
 
 Pour nous remercier, il nous donne une capture réseau chiffré en TLS1.0.
 
@@ -202,10 +202,10 @@ done`
 Comme il reste de la "polution" dans les différents fichiers, on écrit un petit script python qui va récupérer que les parties qui nous intéressent et nous renvoie le md5 du tout : `digest.py`.
 
 On obtient alors une nouvelle url nous permettant d'arriver sur la page de connection du site Evil Gouv Archives.
-![Url des archives d'Evil Gouv](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture15.jpg)
+![Url des archives d'Evil Gouv](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture15.PNG)
 
 #### Les archives d'Evil Gouv
-![Page de login des archives d'Evil Gouv](https://raw.githubusercontent.com/sgranel/challengeBrigitteFriang/main/Capture16.jpg)
+![Page de login des archives d'Evil Gouv](https://github.com/sgranel/challengeBrigitteFriang/blob/main/Capture16.PNG)
 On arrive sur le site qui nous demande de nous connecter. On regarde le code source de la page et on voit que lorsqu'on clique sur le bouton `Se conncter`, du javascript est appelé. S'il renvoie 0, on a un message d'erreur. S'il renvoie 1, on est connecté et redirigé vers la page qui correspond à notre login. Pas de chance, on ne pourra pas simplement forcer la valeur 1. On regarde alors le fichier `login.js`, qui est écrit en hexadécimal.
 
 En regardant la fonction final, on voit qu'il faut que la chaine transformée par 2 fonctions soit égale à `7<0l<ni03<l<l<3>5<b`>dk>j;3n0>>o9n0`nk39`.
