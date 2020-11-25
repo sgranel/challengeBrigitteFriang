@@ -241,4 +241,5 @@ L'image fait plus de 300Mo ce qui laisse penser qu'elle cache quelque chose. Apr
 Ca nous donne un répertoire contenant 2 fichiers .img. On les parcourt avec le logiciel binwalk, ce qui nous donne 2 répertoires. On met le contenu de ces répertoires et les fichiers .img dans l'outil de forensic Autopsy. Hélas, il ne trouve rien de très intéressant. Mais il nous met en garde, car il a trouvé des éléments avec une forte entropy. Ca laisse supposer la présence d'un logiciel malveillant, comme prévenu par Alphonse.
 
 ## Conclusion<a id="conclusion"></a>
-Je n'ai pas pu finir ce challenge, par manque de temps mais aussi des lacunes techniques, en forensic par exemple. Cependant, je l'ai trouvé très intéressant aussi bien techniquement que l'histoire dans lequel il se déroule. Merci à la DGSE pour ce super travail et vivement le prochain.
+Je n'ai pas pu finir toutes les parties du challenge, par manque de temps mais aussi des lacunes techniques, en forensic par exemple. Cependant, je l'ai trouvé très intéressant aussi bien techniquement que l'histoire dans lequel il se déroule. Merci à la DGSE pour ce super travail et vivement le prochain.
+Je sais que pour le prochain, je le ferais en équipe afin de ne pas perdre trop de temps sur certains points et espérer ainsi faire un ou plusieurs challenges présents sur COROS.
